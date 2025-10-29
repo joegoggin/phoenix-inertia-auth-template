@@ -1,4 +1,4 @@
-# Phoenix Inertia Template
+# Phoenix Inertia Auth Template
 
 To start your Phoenix server:
 
