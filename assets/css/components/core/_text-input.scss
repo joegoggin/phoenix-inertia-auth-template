@@ -21,6 +21,8 @@
 
         &::placeholder {
             font-family: inherit;
+            color: var(--text-color);
+            opacity: 0.6;
         }
 
         &:focus {
