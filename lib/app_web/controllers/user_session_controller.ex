@@ -5,10 +5,8 @@ defmodule AppWeb.UserSessionController do
   alias AppWeb.UserAuth
 
   def new(conn, _params) do
-    email = get_in(conn.assigns, [:current_scope, Access.key(:user), Access.key(:email)])
-    form = Phoenix.Component.to_form(%{"email" => email}, as: "user")
-
-    render(conn, :new, form: form)
+    conn
+    |> render_inertia("LogIn")
   end
 
   # magic link login

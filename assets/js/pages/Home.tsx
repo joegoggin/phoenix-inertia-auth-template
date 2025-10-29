@@ -1,3 +1,4 @@
+import Button, { ButtonVariant } from "@/components/core/button";
 import Layout from "@/layouts/Layout";
 import React from "react";
 
@@ -10,6 +11,12 @@ const HomePage: React.FC = () => {
                     <img src="/images/phoenix.png" alt="phoenix logo" />
                     <img src="/images/inertia.png" alt="inertia.js logo" />
                     <img src="/images/react.png" alt="react logo" />
+                </div>
+                <div className="home-page__buttons">
+                    <Button href="/sign-up">Sign Up</Button>
+                    <Button href="/log-in" variant={ButtonVariant.SECONDARY}>
+                        Log In
+                    </Button>
                 </div>
             </div>
         </Layout>
