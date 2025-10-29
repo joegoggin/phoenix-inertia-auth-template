@@ -1,5 +1,5 @@
 import { router } from "@inertiajs/react";
-import React, { ReactNode } from "react";
+import React, { ReactNode, MouseEvent } from "react";
 
 export enum ButtonVariant {
     PRIMARY,
@@ -21,7 +21,9 @@ const Button: React.FC<ButtonProps> = ({
     variant = ButtonVariant.PRIMARY,
     children,
 }) => {
-    const handleClick = () => {
+    const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
+        e.preventDefault();
+
         if (onClick) {
             onClick();
         }

@@ -1,4 +1,4 @@
-import Button, { ButtonVariant } from "@/components/core/button";
+import Button, { ButtonVariant } from "@/components/core/Button";
 import Layout from "@/layouts/Layout";
 import React from "react";
 
