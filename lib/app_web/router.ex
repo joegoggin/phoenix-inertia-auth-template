@@ -18,40 +18,47 @@ defmodule AppWeb.Router do
     plug :accepts, ["json"]
   end
 
-  # Other scopes may use custom stacks.
-  # scope "/api", AppWeb do
-  #   pipe_through :api
-  # end
+  # API routes
 
-  ## Authentication routes
+  scope "/api", AppWeb do
+    pipe_through :api
+  end
+
+  # public routes
 
   scope "/", AppWeb do
-    pipe_through [:browser, :redirect_if_user_is_authenticated]
+    pipe_through :browser
 
-    get "/sign-up", AuthController, :sign_up_page
-    post "/sign-up", AuthController, :sign_up
-
-    get "/log-in", AuthController, :log_in_page
-    get "/log-in/:token", AuthController, :confirm_email
-
-    get "/confirm-email", AuthController, :confirm_email_page
-
-    # post "/users/log-in", UserSessionController, :create
-    # delete "/users/log-out", UserSessionController, :delete
+    get "/", PageController, :home
   end
+
+  # private routes
 
   scope "/", AppWeb do
     pipe_through [:browser, :require_authenticated_user]
+
+    get "/dashboard", PrivateController, :dashboard_page
+    get "/set-password", PrivateController, :set_password_page
 
     # get "/users/settings", UserSettingsController, :edit
     # put "/users/settings", UserSettingsController, :update
     # get "/users/settings/confirm-email/:token", UserSettingsController, :confirm_email
   end
 
-  scope "/", AppWeb do
-    pipe_through :browser
+  # Authentication routes
 
-    get "/", PageController, :home
+  scope "/auth", AppWeb do
+    pipe_through [:browser, :redirect_if_user_is_authenticated]
+
+    get "/sign-up", AuthController, :sign_up_page
+    post "/sign-up", AuthController, :sign_up
+
+    get "/log-in", AuthController, :log_in_page
+    get "/log-in/:token", AuthController, :magic_link_log_in
+
+    get "/confirm-email", AuthController, :confirm_email_page
+
+    delete "/log-out", UserSessionController, :delete
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

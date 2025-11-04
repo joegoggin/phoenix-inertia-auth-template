@@ -51,7 +51,7 @@ defmodule AppWeb.UserSessionController do
     if user = Accounts.get_user_by_email(email) do
       Accounts.deliver_login_instructions(
         user,
-        &url(~p"/users/log-in/#{&1}")
+        &url(~p"/auth/log-in/#{&1}")
       )
     end
 
@@ -60,7 +60,7 @@ defmodule AppWeb.UserSessionController do
 
     conn
     |> put_flash(:info, info)
-    |> redirect(to: ~p"/users/log-in")
+    |> redirect(to: ~p"/auth/log-in")
   end
 
   def confirm(conn, %{"token" => token}) do
@@ -74,7 +74,7 @@ defmodule AppWeb.UserSessionController do
     else
       conn
       |> put_flash(:error, "Magic link is invalid or it has expired.")
-      |> redirect(to: ~p"/users/log-in")
+      |> redirect(to: ~p"/auth/log-in")
     end
   end
 

@@ -1,3 +1,4 @@
+import { Route } from "@/constants/routes";
 import { router } from "@inertiajs/react";
 import React, { ReactNode, MouseEvent } from "react";
 
@@ -9,7 +10,7 @@ export enum ButtonVariant {
 type ButtonProps = {
     className?: string;
     type?: "submit" | "button" | "reset";
-    href?: string;
+    href?: Route;
     onClick?: (e?: any) => void;
     variant?: ButtonVariant;
     children: ReactNode;

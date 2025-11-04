@@ -2,7 +2,6 @@ defmodule AppWeb.UserRegistrationController do
   use AppWeb, :controller
 
   alias App.Accounts
-  alias App.Accounts.User
 
   def sign_up_page(conn, _params) do
     conn
@@ -14,11 +13,11 @@ defmodule AppWeb.UserRegistrationController do
       {:ok, user} ->
         Accounts.deliver_login_instructions(
           user,
-          &url(~p"/log-in/#{&1}")
+          &url(~p"/auth/log-in/#{&1}")
         )
 
         conn
-        |> redirect(to: ~p"/confirm-email")
+        |> redirect(to: ~p"/auth/confirm-email")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, :new, changeset: changeset)

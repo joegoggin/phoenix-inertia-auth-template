@@ -176,7 +176,7 @@ defmodule AppWeb.UserAuth do
       conn
       |> put_flash(:error, "You must re-authenticate to access this page.")
       |> maybe_store_return_to()
-      |> redirect(to: ~p"/users/log-in")
+      |> redirect(to: ~p"/auth/log-in")
       |> halt()
     end
   end
@@ -194,7 +194,7 @@ defmodule AppWeb.UserAuth do
     end
   end
 
-  defp signed_in_path(_conn), do: ~p"/"
+  defp signed_in_path(_conn), do: ~p"/dashboard"
 
   @doc """
   Plug for routes that require the user to be authenticated.
@@ -206,7 +206,7 @@ defmodule AppWeb.UserAuth do
       conn
       |> put_flash(:error, "You must log in to access this page.")
       |> maybe_store_return_to()
-      |> redirect(to: ~p"/users/log-in")
+      |> redirect(to: ~p"/auth/log-in")
       |> halt()
     end
   end

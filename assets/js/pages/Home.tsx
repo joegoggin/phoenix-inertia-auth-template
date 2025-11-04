@@ -1,8 +1,13 @@
 import Button, { ButtonVariant } from "@/components/core/Button";
+import { Routes } from "@/constants/routes";
 import MainLayout from "@/layouts/Layout";
-import React from "react";
+import React, { useEffect } from "react";
 
-const HomePage: React.FC = () => {
+const HomePage: React.FC = (props) => {
+    useEffect(() => {
+        console.log(props);
+    }, [props]);
+
     return (
         <MainLayout className="home-page" title="Phoenix Inertia Template">
             <h1>Phoenix Inertia Template</h1>
@@ -12,8 +17,11 @@ const HomePage: React.FC = () => {
                 <img src="/images/react.png" alt="react logo" />
             </div>
             <div className="home-page__buttons">
-                <Button href="/sign-up">Sign Up</Button>
-                <Button href="/log-in" variant={ButtonVariant.SECONDARY}>
+                <Button href={Routes.auth.signUp}>Sign Up</Button>
+                <Button
+                    href={Routes.auth.logIn}
+                    variant={ButtonVariant.SECONDARY}
+                >
                     Log In
                 </Button>
             </div>

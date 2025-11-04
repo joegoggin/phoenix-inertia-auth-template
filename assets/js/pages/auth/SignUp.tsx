@@ -15,7 +15,7 @@ const SignUpPage: React.FC<PageProps<{}, SignUpErrors>> = ({ errors }) => {
     });
 
     const handleSubmit = () => {
-        post("/sign-up");
+        post("/auth/sign-up");
     };
 
     return (
