@@ -1,13 +1,19 @@
 import { Head } from "@inertiajs/react";
 import React, { ReactNode, useEffect } from "react";
 
-type LayoutProps = {
+type MainLayoutProps = {
+    className?: string;
     title?: string;
     description?: string;
     children: ReactNode;
 };
 
-const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
+const MainLayout: React.FC<MainLayoutProps> = ({
+    className = "",
+    title,
+    description,
+    children,
+}) => {
     useEffect(() => {
         const prefersDark = window.matchMedia(
             "(prefers-color-scheme: dark)",
@@ -25,9 +31,9 @@ const Layout: React.FC<LayoutProps> = ({ title, description, children }) => {
                     <meta name="description" content={description} />
                 )}
             </Head>
-            {children}
+            <div className={`main-layout ${className}`}>{children}</div>
         </>
     );
 };
 
-export default Layout;
+export default MainLayout;

@@ -36,9 +36,25 @@
         }
     }
 
+    &--error {
+        input {
+            border-bottom: 1px solid colors.$cadmium-red-100;
+
+            &::placeholder {
+                color: colors.$cadmium-red-100;
+                opacity: 1;
+            }
+        }
+    }
+
     label {
         margin-bottom: 10px;
         color: var(--text-color);
         font-family: Roboto;
+    }
+
+    p {
+        margin-top: 5px;
+        color: colors.$cadmium-red-100;
     }
 }

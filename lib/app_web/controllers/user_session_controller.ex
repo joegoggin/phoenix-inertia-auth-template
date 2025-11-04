@@ -4,7 +4,7 @@ defmodule AppWeb.UserSessionController do
   alias App.Accounts
   alias AppWeb.UserAuth
 
-  def new(conn, _params) do
+  def log_in_page(conn, _params) do
     conn
     |> render_inertia("LogIn")
   end

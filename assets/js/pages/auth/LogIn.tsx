@@ -1,10 +1,10 @@
-import Layout from "@/layouts/Layout";
+import MainLayout from "@/layouts/Layout";
 
 const LogInPage = () => {
     return (
-        <Layout>
+        <MainLayout>
             <h1>Log In Page</h1>
-        </Layout>
+        </MainLayout>
     );
 };
 

@@ -4,26 +4,21 @@ defmodule AppWeb.UserRegistrationController do
   alias App.Accounts
   alias App.Accounts.User
 
-  def new(conn, _params) do
+  def sign_up_page(conn, _params) do
     conn
     |> render_inertia("SignUp")
   end
 
-  def create(conn, %{"user" => user_params}) do
-    case Accounts.register_user(user_params) do
+  def sign_up(conn, params) do
+    case Accounts.register_user(params) do
       {:ok, user} ->
-        {:ok, _} =
-          Accounts.deliver_login_instructions(
-            user,
-            &url(~p"/users/log-in/#{&1}")
-          )
+        Accounts.deliver_login_instructions(
+          user,
+          &url(~p"/log-in/#{&1}")
+        )
 
         conn
-        |> put_flash(
-          :info,
-          "An email was sent to #{user.email}, please access it to confirm your account."
-        )
-        |> redirect(to: ~p"/users/log-in")
+        |> redirect(to: ~p"/confirm-email")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         render(conn, :new, changeset: changeset)

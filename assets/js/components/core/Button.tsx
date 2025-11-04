@@ -8,14 +8,16 @@ export enum ButtonVariant {
 
 type ButtonProps = {
     className?: string;
+    type?: "submit" | "button" | "reset";
     href?: string;
-    onClick?: () => void;
+    onClick?: (e?: any) => void;
     variant?: ButtonVariant;
     children: ReactNode;
 };
 
 const Button: React.FC<ButtonProps> = ({
     className,
+    type = "submit",
     href,
     onClick,
     variant = ButtonVariant.PRIMARY,
@@ -52,7 +54,7 @@ const Button: React.FC<ButtonProps> = ({
     };
 
     return (
-        <button className={getClassName()} onClick={handleClick}>
+        <button type={type} className={getClassName()} onClick={handleClick}>
             {children}
         </button>
     );

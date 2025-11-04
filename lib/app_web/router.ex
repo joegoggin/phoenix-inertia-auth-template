@@ -28,11 +28,14 @@ defmodule AppWeb.Router do
   scope "/", AppWeb do
     pipe_through [:browser, :redirect_if_user_is_authenticated]
 
-    get "/sign-up", UserRegistrationController, :new
-    # post "/users/register", UserRegistrationController, :create
+    get "/sign-up", AuthController, :sign_up_page
+    post "/sign-up", AuthController, :sign_up
 
-    get "/log-in", UserSessionController, :new
-    # get "/users/log-in/:token", UserSessionController, :confirm
+    get "/log-in", AuthController, :log_in_page
+    get "/log-in/:token", AuthController, :confirm_email
+
+    get "/confirm-email", AuthController, :confirm_email_page
+
     # post "/users/log-in", UserSessionController, :create
     # delete "/users/log-out", UserSessionController, :delete
   end

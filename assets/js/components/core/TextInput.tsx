@@ -1,5 +1,6 @@
 import { SetData } from "@/types/SetData";
-import { ChangeEvent } from "react";
+import { ChangeEvent, useEffect, useState } from "react";
+import { capitalize } from "@/utils/capitalize";
 
 type TextInputProps<T> = {
     className?: string;
@@ -9,23 +10,55 @@ type TextInputProps<T> = {
     data: T;
     setData: SetData<T>;
     password?: boolean;
+    error?: string;
 };
 
 const TextInput = <T,>({
-    className = "",
+    className,
     label,
     placeholder = "",
     name,
     data,
     setData,
     password,
+    error,
 }: TextInputProps<T>) => {
+    const [classes, setClasses] = useState<string>("text-input");
+    const [showError, setShowError] = useState<boolean>(error ? true : false);
+
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setData(name, e.target.value);
+        setShowError(false);
     };
 
+    useEffect(() => {
+        setShowError(error ? true : false);
+    }, [error]);
+
+    useEffect(() => {
+        let newClasses = "text-input";
+
+        if (showError) {
+            newClasses += " text-input--error";
+        }
+
+        if (className) {
+            newClasses += ` ${className}`;
+        }
+
+        setClasses(newClasses);
+    }, [showError, className]);
+
+    useEffect(() => {
+        console.log("classes: ", classes);
+    }, [classes]);
+
+    useEffect(() => {
+        console.log("showError: ", showError);
+    }, [showError]);
+
     return (
-        <div className={`text-input ${className}`}>
+        <div className={classes}>
             {label && <label>{label}</label>}
             <input
                 type={password ? "password" : "text"}
@@ -33,6 +66,7 @@ const TextInput = <T,>({
                 onChange={handleChange}
                 value={data[name] as string}
             />
+            {showError && <p>{`${capitalize(name as string)} ${error}`}</p>}
         </div>
     );
 };
