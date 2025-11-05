@@ -38,7 +38,9 @@ defmodule AppWeb.Router do
     pipe_through [:browser, :require_authenticated_user]
 
     get "/dashboard", PrivateController, :dashboard_page
+
     get "/set-password", PrivateController, :set_password_page
+    post "/set-password", PrivateController, :set_password
 
     # get "/users/settings", UserSettingsController, :edit
     # put "/users/settings", UserSettingsController, :update

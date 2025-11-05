@@ -49,13 +49,16 @@ const TextInput = <T,>({
         setClasses(newClasses);
     }, [showError, className]);
 
-    useEffect(() => {
-        console.log("classes: ", classes);
-    }, [classes]);
+    const getErrorString = () => {
+        let formated_name = "";
+        const split = (name as string).split("_");
 
-    useEffect(() => {
-        console.log("showError: ", showError);
-    }, [showError]);
+        split.forEach((str) => {
+            formated_name += `${capitalize(str)} `;
+        });
+
+        return `${formated_name}${error}`;
+    };
 
     return (
         <div className={classes}>
@@ -66,7 +69,7 @@ const TextInput = <T,>({
                 onChange={handleChange}
                 value={data[name] as string}
             />
-            {showError && <p>{`${capitalize(name as string)} ${error}`}</p>}
+            {showError && <p>{getErrorString()}</p>}
         </div>
     );
 };
