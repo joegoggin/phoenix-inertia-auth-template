@@ -54,4 +54,14 @@ defmodule AppWeb.PrivateController do
         |> redirect(to: ~p"/set-password")
     end
   end
+
+  @doc """
+    route: delete /auth/log-out
+
+    Logs out user
+  """
+  def log_out(conn, _params) do
+    conn
+    |> UserAuth.log_out_user()
+  end
 end

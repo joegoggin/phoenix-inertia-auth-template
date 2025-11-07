@@ -40,7 +40,9 @@ defmodule AppWeb.Router do
     get "/dashboard", PrivateController, :dashboard_page
 
     get "/set-password", PrivateController, :set_password_page
-    post "/set-password", PrivateController, :set_password
+    put "/set-password", PrivateController, :set_password
+
+    delete "/log-out", PrivateController, :log_out
 
     # get "/users/settings", UserSettingsController, :edit
     # put "/users/settings", UserSettingsController, :update
@@ -59,8 +61,6 @@ defmodule AppWeb.Router do
     get "/log-in/:token", AuthController, :magic_link_log_in
 
     get "/confirm-email", AuthController, :confirm_email_page
-
-    delete "/log-out", UserSessionController, :delete
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

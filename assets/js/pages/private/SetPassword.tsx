@@ -8,13 +8,13 @@ import { useEffect } from "react";
 const SetPasswordPage: React.FC<
     PageProps<{}, { password: string; password_confirmation: string }>
 > = ({ errors }) => {
-    const { data, setData, post } = useForm({
+    const { data, setData, put } = useForm({
         password: "",
         password_confirmation: "",
     });
 
     const handleSubmit = () => {
-        post("/set-password");
+        put("/set-password");
     };
 
     useEffect(() => {
