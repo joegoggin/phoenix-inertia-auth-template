@@ -1,12 +1,7 @@
 import Button, { ButtonVariant } from "@/components/core/Button";
-import MainLayout from "@/layouts/Layout";
-import { useEffect } from "react";
+import MainLayout from "@/layouts/MainLayout";
 
-const HomePage: React.FC = (props) => {
-    useEffect(() => {
-        console.log(props);
-    }, [props]);
-
+const HomePage: React.FC = () => {
     return (
         <MainLayout className="home-page" title="Phoenix Inertia Template">
             <h1>Phoenix Inertia Template</h1>

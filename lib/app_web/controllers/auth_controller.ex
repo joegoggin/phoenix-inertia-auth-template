@@ -3,6 +3,7 @@ defmodule AppWeb.AuthController do
 
   alias AppWeb.UserAuth
   alias App.Accounts
+  alias App.Notifications.Notification
 
   @doc """
     route: get /auth/sign-in
@@ -28,8 +29,17 @@ defmodule AppWeb.AuthController do
           &url(~p"/auth/log-in/#{&1}")
         )
 
+        notifications = [
+          Notification.new(
+            :success,
+            "Account Created!",
+            "Check your email to confirm your account"
+          )
+        ]
+
         conn
-        |> redirect(to: ~p"/auth/confirm-email")
+        |> put_flash(:notifications, notifications)
+        |> redirect(to: ~p"/auth/sign-up")
 
       {:error, %Ecto.Changeset{} = changeset} ->
         conn
@@ -60,7 +70,7 @@ defmodule AppWeb.AuthController do
       {:ok, {user, _expired_tokens}} ->
         conn
         |> UserAuth.log_in_user(user)
-        |> redirect(to: ~p"/auth/set-password")
+        |> redirect(to: ~p"/set-password")
 
       {:error, :not_found} ->
         conn

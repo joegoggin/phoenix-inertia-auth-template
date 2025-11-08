@@ -1,5 +1,5 @@
 import Button from "@/components/core/Button";
-import MainLayout from "@/layouts/Layout";
+import MainLayout from "@/layouts/MainLayout";
 import { router } from "@inertiajs/react";
 
 const DashboardPage: React.FC = () => {

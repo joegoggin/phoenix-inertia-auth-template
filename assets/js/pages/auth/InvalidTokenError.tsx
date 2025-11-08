@@ -1,4 +1,4 @@
-import MainLayout from "@/layouts/Layout";
+import MainLayout from "@/layouts/MainLayout";
 import Button from "@/components/core/Button";
 
 const InvalidTokenPage: React.FC = () => {

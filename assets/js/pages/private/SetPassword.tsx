@@ -1,7 +1,7 @@
 import Button from "@/components/core/Button";
 import Form from "@/components/core/Form";
 import TextInput from "@/components/core/TextInput";
-import MainLayout from "@/layouts/Layout";
+import MainLayout from "@/layouts/MainLayout";
 import { useForm } from "@inertiajs/react";
 
 const SetPasswordPage: React.FC = () => {

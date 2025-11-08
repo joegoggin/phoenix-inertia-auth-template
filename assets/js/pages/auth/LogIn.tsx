@@ -1,4 +1,4 @@
-import MainLayout from "@/layouts/Layout";
+import MainLayout from "@/layouts/MainLayout";
 
 const LogInPage = () => {
     return (

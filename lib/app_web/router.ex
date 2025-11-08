@@ -59,8 +59,6 @@ defmodule AppWeb.Router do
 
     get "/log-in", AuthController, :log_in_page
     get "/log-in/:token", AuthController, :magic_link_log_in
-
-    get "/confirm-email", AuthController, :confirm_email_page
   end
 
   # Enable LiveDashboard and Swoosh mailbox preview in development

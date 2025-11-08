@@ -4,4 +4,14 @@
     justify-content: center;
     align-items: center;
     height: 100vh;
+
+    &__notifications {
+        position: absolute;
+        top: 40px;
+        right: 20px;
+
+        & > div {
+            margin-bottom: 20px;
+        }
+    }
 }
