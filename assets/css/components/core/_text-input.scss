@@ -39,6 +39,7 @@
     &--error {
         input {
             border-bottom: 1px solid colors.$cadmium-red-100;
+            color: colors.$cadmium-red-100;
 
             &::placeholder {
                 color: colors.$cadmium-red-100;

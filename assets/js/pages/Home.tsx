@@ -1,7 +1,6 @@
 import Button, { ButtonVariant } from "@/components/core/Button";
-import { Routes } from "@/constants/routes";
 import MainLayout from "@/layouts/Layout";
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 
 const HomePage: React.FC = (props) => {
     useEffect(() => {
@@ -17,11 +16,8 @@ const HomePage: React.FC = (props) => {
                 <img src="/images/react.png" alt="react logo" />
             </div>
             <div className="home-page__buttons">
-                <Button href={Routes.auth.signUp}>Sign Up</Button>
-                <Button
-                    href={Routes.auth.logIn}
-                    variant={ButtonVariant.SECONDARY}
-                >
+                <Button href={"/auth/sign-up"}>Sign Up</Button>
+                <Button href={"/auth/log-in"} variant={ButtonVariant.SECONDARY}>
                     Log In
                 </Button>
             </div>

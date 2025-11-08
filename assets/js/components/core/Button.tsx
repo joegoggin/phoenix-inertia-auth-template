@@ -1,6 +1,5 @@
-import { Route } from "@/constants/routes";
 import { router } from "@inertiajs/react";
-import React, { ReactNode, MouseEvent } from "react";
+import { ReactNode, MouseEvent } from "react";
 
 export enum ButtonVariant {
     PRIMARY,
@@ -10,7 +9,7 @@ export enum ButtonVariant {
 type ButtonProps = {
     className?: string;
     type?: "submit" | "button" | "reset";
-    href?: Route;
+    href?: string;
     onClick?: (e?: any) => void;
     variant?: ButtonVariant;
     children: ReactNode;
@@ -18,14 +17,16 @@ type ButtonProps = {
 
 const Button: React.FC<ButtonProps> = ({
     className,
-    type = "submit",
+    type = "button",
     href,
     onClick,
     variant = ButtonVariant.PRIMARY,
     children,
 }) => {
     const handleClick = (e: MouseEvent<HTMLButtonElement>) => {
-        e.preventDefault();
+        if (type != "submit") {
+            e.preventDefault();
+        }
 
         if (onClick) {
             onClick();

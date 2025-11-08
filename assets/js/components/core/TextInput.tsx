@@ -1,6 +1,7 @@
 import { SetData } from "@/types/SetData";
 import { ChangeEvent, useEffect, useState } from "react";
 import { capitalize } from "@/utils/capitalize";
+import { usePage } from "@inertiajs/react";
 
 type TextInputProps<T> = {
     className?: string;
@@ -10,7 +11,6 @@ type TextInputProps<T> = {
     data: T;
     setData: SetData<T>;
     password?: boolean;
-    error?: string;
 };
 
 const TextInput = <T,>({
@@ -21,24 +21,31 @@ const TextInput = <T,>({
     data,
     setData,
     password,
-    error,
 }: TextInputProps<T>) => {
     const [classes, setClasses] = useState<string>("text-input");
-    const [showError, setShowError] = useState<boolean>(error ? true : false);
+    const [userEditing, setUserEditing] = useState<boolean>(false);
+    const [error, setError] = useState<string>();
+
+    const { props } = usePage();
 
     const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
         setData(name, e.target.value);
-        setShowError(false);
+        setUserEditing(true);
     };
 
     useEffect(() => {
-        setShowError(error ? true : false);
-    }, [error]);
+        const newError = props.errors[name as string];
+
+        if (newError) {
+            setError(newError);
+            setUserEditing(false);
+        }
+    }, [props]);
 
     useEffect(() => {
         let newClasses = "text-input";
 
-        if (showError) {
+        if (error && !userEditing) {
             newClasses += " text-input--error";
         }
 
@@ -47,7 +54,7 @@ const TextInput = <T,>({
         }
 
         setClasses(newClasses);
-    }, [showError, className]);
+    }, [error, userEditing, className]);
 
     const getErrorString = () => {
         let formated_name = "";
@@ -69,7 +76,7 @@ const TextInput = <T,>({
                 onChange={handleChange}
                 value={data[name] as string}
             />
-            {showError && <p>{getErrorString()}</p>}
+            {error && !userEditing && <p>{getErrorString()}</p>}
         </div>
     );
 };

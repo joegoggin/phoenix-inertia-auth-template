@@ -1,5 +1,5 @@
 import { Head } from "@inertiajs/react";
-import React, { ReactNode, useEffect } from "react";
+import { ReactNode, useEffect } from "react";
 
 type MainLayoutProps = {
     className?: string;
