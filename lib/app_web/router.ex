@@ -29,7 +29,7 @@ defmodule AppWeb.Router do
   scope "/", AppWeb do
     pipe_through :browser
 
-    get "/", PageController, :home
+    get "/", PublicController, :home
   end
 
   # private routes

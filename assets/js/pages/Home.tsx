@@ -4,7 +4,7 @@ import MainLayout from "@/layouts/MainLayout";
 const HomePage: React.FC = () => {
     return (
         <MainLayout className="home-page" title="Phoenix Inertia Template">
-            <h1>Phoenix Inertia Template</h1>
+            <h1>Phoenix Inertia Auth Template</h1>
             <div className="home-page__images">
                 <img src="/images/phoenix.png" alt="phoenix logo" />
                 <img src="/images/inertia.png" alt="inertia.js logo" />

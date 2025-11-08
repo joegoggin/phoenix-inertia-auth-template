@@ -1,4 +1,4 @@
-defmodule AppWeb.PageController do
+defmodule AppWeb.PublicController do
   use AppWeb, :controller
 
   alias App.Notifications.Notification
