@@ -2,6 +2,7 @@ defmodule AppWeb.AuthController do
   use AppWeb, :controller
 
   alias AppWeb.UserAuth
+  alias AppWeb.Utils.ValidationUtils
   alias App.Accounts
   alias App.Notifications.Notification
 
@@ -18,8 +19,7 @@ defmodule AppWeb.AuthController do
   @doc """
     route: post /auth/sign-in
 
-    Creates account, sends confirmation emails, and redirects to
-    `/confirm-email` 
+    Creates account and sends confirmation emails
   """
   def sign_up(conn, params) do
     case Accounts.register_user(params) do
@@ -49,17 +49,7 @@ defmodule AppWeb.AuthController do
   end
 
   @doc """
-    route: get /confirm-email
-
-    Renders confirm email page  
-  """
-  def confirm_email_page(conn, _params) do
-    conn
-    |> render_inertia("auth/ConfirmEmail")
-  end
-
-  @doc """
-    route: get /log-in/:token
+    route: get /auth/log-in/:token
 
     Attempts to log in user with magic link from email. if successful the user
     is redirected to `/set-password`. If log in fails an error screen is
@@ -79,12 +69,42 @@ defmodule AppWeb.AuthController do
   end
 
   @doc """
-    route: get /log-in
+    route: get /auth/log-in
 
     Renders log in page
   """
   def log_in_page(conn, _params) do
     conn
     |> render_inertia("auth/LogIn")
+  end
+
+  @doc """
+    route: post /auth/log-in
+
+    Logs in user
+  """
+  def log_in(conn, %{"email" => email, "password" => password} = params) do
+    required_params = [:email, :password]
+
+    case ValidationUtils.validate_required_params(required_params, params) do
+      {:error, errors} ->
+        conn
+        |> assign_errors(errors)
+        |> redirect(to: ~p"/auth/log-in")
+
+      :ok ->
+        if user = Accounts.get_user_by_email_and_password(email, password) do
+          conn
+          |> UserAuth.log_in_user(user)
+        else
+          notifications = [
+            Notification.new(:error, "Login Failed!", "Invalid email or password.")
+          ]
+
+          conn
+          |> put_flash(:notifications, notifications)
+          |> redirect(to: ~p"/auth/log-in")
+        end
+    end
   end
 end

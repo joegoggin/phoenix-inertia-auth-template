@@ -58,6 +58,7 @@ defmodule AppWeb.Router do
     post "/sign-up", AuthController, :sign_up
 
     get "/log-in", AuthController, :log_in_page
+    post "/log-in", AuthController, :log_in
     get "/log-in/:token", AuthController, :magic_link_log_in
   end
 
