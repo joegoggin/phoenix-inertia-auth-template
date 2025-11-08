@@ -95,7 +95,7 @@ defmodule AppWeb.AuthController do
       :ok ->
         if user = Accounts.get_user_by_email_and_password(email, password) do
           conn
-          |> UserAuth.log_in_user(user)
+          |> UserAuth.log_in_user(user, params)
         else
           notifications = [
             Notification.new(:error, "Login Failed!", "Invalid email or password.")

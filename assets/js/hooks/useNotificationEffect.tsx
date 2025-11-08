@@ -1,5 +1,5 @@
 import { NotificationType } from "@/components/core/Notification";
-import { Flash } from "@/types/flash";
+import { Flash } from "@/types/Flash";
 import { usePage } from "@inertiajs/react";
 import { useEffect } from "react";
 
